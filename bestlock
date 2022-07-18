@@ -122,9 +122,9 @@ SpinAA.Text = "Spin AA (No Toggle)"
 SpinAA.TextColor3 = Color3.fromRGB(255, 255, 255)
 SpinAA.TextSize = 14.000
 SpinAA.MouseButton1Click:Connect(function()
-	getgenv().SemiRageAA = false
+	getgenv().SemiRageAA = true
 	--
-	getgenv().BlatantAA = true
+	getgenv().BlatantAA = false
 
 
 
