@@ -1,1 +1,263 @@
 game:GetService("Players").LocalPlayer:Kick("PERMA-BAN")
+-- Gui to Lua
+-- Version: 3.2
+
+-- Instances:
+
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local AAUI = Instance.new("TextLabel")
+local UndergroundAA = Instance.new("TextButton")
+local UndergroundAAN = Instance.new("TextButton")
+local SpinAA = Instance.new("TextButton")
+local ManualAA = Instance.new("TextButton")
+local Seperation = Instance.new("TextLabel")
+local AAs = Instance.new("TextLabel")
+local AAresolver = Instance.new("TextLabel")
+local UndergroundAAResolver = Instance.new("TextButton")
+
+--Properties:
+
+ScreenGui.Parent = game.CoreGui
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+Frame.BorderColor3 = Color3.fromRGB(255, 170, 255)
+Frame.BorderSizePixel = 2
+Frame.Position = UDim2.new(0.375127435, 0, 0.220255658, 0)
+Frame.Size = UDim2.new(0, 471, 0, 568)
+Frame.Active = true
+Frame.Draggable = true
+
+AAUI.Name = "AAUI"
+AAUI.Parent = Frame
+AAUI.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+AAUI.BorderColor3 = Color3.fromRGB(85, 170, 255)
+AAUI.Position = UDim2.new(0.00423721364, 0, 0.00351492106, 0)
+AAUI.Size = UDim2.new(0, 460, 0, 25)
+AAUI.Font = Enum.Font.Cartoon
+AAUI.Text = "AA UI"
+AAUI.TextColor3 = Color3.fromRGB(255, 255, 255)
+AAUI.TextSize = 14.000
+
+UndergroundAA.Name = "Underground AA"
+UndergroundAA.Parent = Frame
+UndergroundAA.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+UndergroundAA.BorderColor3 = Color3.fromRGB(170, 85, 255)
+UndergroundAA.Position = UDim2.new(0.012953368, 0, 0.132042259, 0)
+UndergroundAA.Size = UDim2.new(0, 218, 0, 31)
+UndergroundAA.Font = Enum.Font.Code
+UndergroundAA.Text = "UNDERGROUND AA (No Toggle)"
+UndergroundAA.TextColor3 = Color3.fromRGB(255, 255, 255)
+UndergroundAA.TextSize = 14.000
+UndergroundAA.MouseButton1Click:Connect(function()
+	getgenv().enabled = true
+	local vel = -70
+	local hip = 3.1
+
+	function anti()
+		while getgenv().enabled == true do
+			task.wait()
+			local oldvel = game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity
+			game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(oldvel.X, vel, oldvel.Z)
+			game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(oldvel.X, oldvel.Y, oldvel.Z)
+			game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(oldvel.X, vel, oldvel.Z)
+			game.Players.LocalPlayer.Character.Humanoid.HipHeight = hip
+		end
+	end
+
+	anti()
+end)
+
+UndergroundAAN.Name = "Underground AA N"
+UndergroundAAN.Parent = Frame
+UndergroundAAN.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+UndergroundAAN.BorderColor3 = Color3.fromRGB(170, 85, 255)
+UndergroundAAN.Position = UDim2.new(0.012953368, 0, 0.216549307, 0)
+UndergroundAAN.Size = UDim2.new(0, 191, 0, 34)
+UndergroundAAN.Font = Enum.Font.Code
+UndergroundAAN.Text = "UNDERGROUND AA (keybind N)"
+UndergroundAAN.TextColor3 = Color3.fromRGB(255, 255, 255)
+UndergroundAAN.TextSize = 14.000
+UndergroundAAN.MouseButton1Click:Connect(function()
+	--Anti aim
+	local Toggled = false
+	local KeyCode = 'n'
+
+
+	function AA()
+		local oldVelocity = game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity
+		game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(oldVelocity.X, -70, oldVelocity.Z)
+		game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(oldVelocity.X, oldVelocity.Y, oldVelocity.Z)
+		game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(oldVelocity.X, -70, oldVelocity.Z)
+		game.Players.LocalPlayer.Character.Humanoid.HipHeight = 3.1
+	end
+
+	game:GetService('UserInputService').InputBegan:Connect(function(Key)
+		if Key.KeyCode == Enum.KeyCode[KeyCode:upper()] and not game:GetService('UserInputService'):GetFocusedTextBox() then
+			if Toggled then
+				Toggled = false
+				game.Players.LocalPlayer.Character.Humanoid.HipHeight = 1.85
+
+			elseif not Toggled then
+				Toggled = true
+
+				while Toggled do
+					AA()
+					task.wait()
+				end
+			end
+		end
+	end)
+end)
+
+SpinAA.Name = "Spin AA"
+SpinAA.Parent = Frame
+SpinAA.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+SpinAA.BorderColor3 = Color3.fromRGB(170, 85, 255)
+SpinAA.Position = UDim2.new(0.012953368, 0, 0.315140814, 0)
+SpinAA.Size = UDim2.new(0, 191, 0, 34)
+SpinAA.Font = Enum.Font.Code
+SpinAA.Text = "Spin AA (No Toggle)"
+SpinAA.TextColor3 = Color3.fromRGB(255, 255, 255)
+SpinAA.TextSize = 14.000
+SpinAA.MouseButton1Click:Connect(function()
+	getgenv().SemiRageAA = true
+	--
+	getgenv().BlatantAA = false
+
+
+	local Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+	while getgenv().BlatantAA == true  do
+		task.wait()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = (CFrame.new(Position) + Vector3.new(math.random(-15, 15), math.random(-15, 15), math.random(-15, 15))) * CFrame.Angles(math.rad(math.random(-180, 180)), math.rad(math.random(-180, 180)), math.rad(math.random(-180, 180)))
+	end
+	while getgenv().SemiRageAA == true  do
+		task.wait()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = (CFrame.new(Position) + Vector3.new(math.random(-5, 1), math.random(-5, 1), math.random(-5, 1))) * CFrame.Angles(math.rad(math.random(-5, 1)), math.rad(math.random(-5, 1)), math.rad(math.random(-5, 1)))
+	end
+end)
+
+ManualAA.Name = "Manual AA"
+ManualAA.Parent = Frame
+ManualAA.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+ManualAA.BorderColor3 = Color3.fromRGB(170, 85, 255)
+ManualAA.Position = UDim2.new(0.012953368, 0, 0.413732409, 0)
+ManualAA.Size = UDim2.new(0, 191, 0, 34)
+ManualAA.Font = Enum.Font.Code
+ManualAA.Text = "Manual AA (Reset)"
+ManualAA.TextColor3 = Color3.fromRGB(255, 255, 255)
+ManualAA.TextSize = 14.000
+ManualAA.MouseButton1Click:Connect(function()
+	getgenv().Enabled = true
+	getgenv().LeftSide = Enum.KeyCode.A
+	getgenv().RightSide = Enum.KeyCode.D
+	getgenv().ForwardSide = Enum.KeyCode.W
+	getgenv().BackwardsSide = Enum.KeyCode.S
+	getgenv().LeftOffest = -5
+	getgenv().RightOffest = 5
+	getgenv().ForwardOffest = -5
+	getgenv().BackwardsOffest = 5
+
+	local UIS = game:GetService'UserInputService'
+
+	UIS.InputBegan:Connect(function(keybind,loops)
+		if (not loops) then
+			if (keybind.KeyCode == getgenv().LeftSide) then
+				if getgenv().Enabled == true then
+					game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(getgenv().LeftOffest, 0, 0)
+				end
+			end
+		end
+	end)
+
+	UIS.InputBegan:Connect(function(keybind,loops)
+		if (not loops) then
+			if (keybind.KeyCode == getgenv().RightSide) then
+				if getgenv().Enabled == true then
+					game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(getgenv().RightOffest, 0, 0)
+				end
+			end
+		end
+	end)
+
+	UIS.InputBegan:Connect(function(keybind,loops)
+		if (not loops) then
+			if (keybind.KeyCode == getgenv().ForwardSide) then
+				if getgenv().Enabled == true then
+					game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(0, 0, getgenv().ForwardOffest)
+				end
+			end
+		end
+	end)
+
+	UIS.InputBegan:Connect(function(keybind,loops)
+		if (not loops) then
+			if (keybind.KeyCode == getgenv().BackwardsSide) then
+				if getgenv().Enabled == true then
+					game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(0, 0, getgenv().BackwardsOffest)
+				end
+			end
+		end
+	end)
+
+end)
+
+Seperation.Name = "Seperation"
+Seperation.Parent = Frame
+Seperation.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Seperation.Position = UDim2.new(0.498938441, 0, 0.0616197176, 0)
+Seperation.Size = UDim2.new(0, 0, 0, 533)
+Seperation.Font = Enum.Font.SourceSans
+Seperation.Text = ""
+Seperation.TextColor3 = Color3.fromRGB(0, 0, 0)
+Seperation.TextSize = 14.000
+
+AAs.Name = "AA's"
+AAs.Parent = Frame
+AAs.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+AAs.BorderColor3 = Color3.fromRGB(85, 0, 255)
+AAs.Position = UDim2.new(0.0150215169, 0, 0.0631633252, 0)
+AAs.Size = UDim2.new(0, 222, 0, 25)
+AAs.Font = Enum.Font.Cartoon
+AAs.Text = "AA's"
+AAs.TextColor3 = Color3.fromRGB(255, 255, 255)
+AAs.TextSize = 14.000
+
+AAresolver.Name = "AA resolver"
+AAresolver.Parent = Frame
+AAresolver.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+AAresolver.BorderColor3 = Color3.fromRGB(85, 0, 255)
+AAresolver.Position = UDim2.new(0.51156044, 0, 0.0611803271, 0)
+AAresolver.Size = UDim2.new(0, 222, 0, 25)
+AAresolver.Font = Enum.Font.Cartoon
+AAresolver.Text = "AA Resovler's"
+AAresolver.TextColor3 = Color3.fromRGB(255, 255, 255)
+AAresolver.TextSize = 14.000
+
+UndergroundAAResolver.Name = "Underground AA Resolver"
+UndergroundAAResolver.Parent = Frame
+UndergroundAAResolver.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+UndergroundAAResolver.BorderColor3 = Color3.fromRGB(170, 85, 255)
+UndergroundAAResolver.Position = UDim2.new(0.511891782, 0, 0.130281702, 0)
+UndergroundAAResolver.Size = UDim2.new(0, 191, 0, 34)
+UndergroundAAResolver.Font = Enum.Font.Code
+UndergroundAAResolver.Text = "Underground AA Resolver"
+UndergroundAAResolver.TextColor3 = Color3.fromRGB(255, 255, 255)
+UndergroundAAResolver.TextSize = 14.000
+MouseButton1Click:Connect(function()
+	local RunService = game:GetService("RunService")
+
+	RunService.Heartbeat:Connect(function()
+		pcall(function()
+			for i,v in pairs(game.Players:GetChildren()) do
+				if v.Name ~= game.Players.LocalPlayer.Name then
+					local hrp = v.Character.HumanoidRootPart
+					hrp.Velocity = Vector3.new(hrp.Velocity.X, 0, hrp.Velocity.Z)    
+					hrp.AssemblyLinearVelocity = Vector3.new(hrp.Velocity.X, 0, hrp.Velocity.Z)   
+				end
+			end
+		end)
+	end)
+end)
