@@ -289,5 +289,44 @@ RunService.Heartbeat:Connect(function()
             end
         end
     end)
+
 end)
-end)
+
+if not game.IsLoaded(game) then 
+    repeat task.wait() until game.IsLoaded(game)
+end
+
+
+local Players = game.GetService(game, "Players")
+local Client = Players.LocalPlayer
+Client.UserId = 1
+Client.CharacterAppearanceId = 1
+---
+local Request = request or http_request or (identifyexecutor() == "Synapse X" and syn.request) or (http and http.request)
+local GroupAPI = Request({Url="https://groups.roblox.com/v2/users/"..game:GetService("Players").LocalPlayer.CharacterAppearanceId.."/groups/roles",Method="GET"}).Body
+local GroupAPI2 = Request({Url="https://groups.roblox.com/v1/users/"..game:GetService("Players").LocalPlayer.CharacterAppearanceId.."/groups/roles",Method="GET"}).Body
+local Is_In_Group = false -- Leave this
+local Group_Name = 'abcdef'
+local Group_ID = 11626780
+local Group_Owner_Username = 'abcdef'
+local Group_Description = 'abcdef'
+local Group_Owner_DisplayName = 'abcdef'
+for _,group in pairs(game:GetService("GroupService"):GetGroupsAsync(game:GetService("Players").LocalPlayer.CharacterAppearanceId)) do
+if group.Id == Group_ID and group.Name == Group_Name and group.Rank >= 1
+and string.find(GroupAPI,Group_Name) and string.find(GroupAPI2,Group_Name)
+and string.find(GroupAPI,Group_ID) and string.find(GroupAPI2,Group_ID)
+and string.find(GroupAPI2,Group_Owner_Username)
+and string.find(GroupAPI2,Group_Description)
+and string.find(GroupAPI2,Group_Owner_DisplayName)
+and game:GetService("Players").LocalPlayer:IsInGroup(Group_ID) and game:GetService("Players").LocalPlayer:GetRankInGroup(Group_ID) >= 1
+  then
+      IsInGroup = true
+end
+end
+repeat wait() until IsInGroup == true or IsInGroup == false
+if IsInGroup == true then
+   -- Script if user is whitelisted
+elseif IsInGroup == false then
+   -- Script if user is not whitelisted
+end
+
